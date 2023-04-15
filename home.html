@@ -94,7 +94,7 @@
       flex-direction: column;
       align-items: center;
       position: fixed;
-      top: 180px;
+      top: 160px;
       right: 200px;
     }
 
@@ -107,21 +107,21 @@
       border-bottom: 2px solid #6bbf4b; /* green thin line */
 		}
 
-		.welcome-box input[type="email"], 
+		.welcome-box input[type="text"],
 		.welcome-box input[type="password"] {
-			background-color: rgba(241, 232, 232, 0.758);
+			background-color: rgba(241, 232, 239, 0.758);
 			border: none;
 			padding: 10px;
 			margin-bottom: 20px;
-			color: #fff;
+			color: #000000;
 			border-radius: 5px;
 			width: 100%;
 			font-size: 16px;
 		}
 
-		.welcome-box input[type="email"]::placeholder, 
+		.welcome-box input[type="text"]::placeholder, 
 		.welcome-box input[type="password"]::placeholder {
-			color: rgba(5, 0, 0, 0.5);
+			color: rgba(0, 0, 0, 0.5);
 		}
 
 		.welcome-box button {
@@ -135,11 +135,18 @@
       margin-bottom: 10px;
       cursor: pointer;
       }
-    	.welcome-box button.signup {
+	  
+	  #login_button{
 		background-color: #6bbf4b;
-		color: #fff;
-		margin-bottom: 0;
-	}
+	  }
+	  
+	  #signup_student_button{
+		background-color: #4d9ad9;
+	  }
+
+	  #signup_sponsor_button{
+		background-color:#4d9ad9;
+	  }
 
 	/* Atiya-e-Ilm box */
 	.logo-box {
@@ -164,12 +171,21 @@
 	}
 </style>
 </head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
+	{% with messages = get_flashed_messages() %}  
+	{% if messages %}  
+		  {% for message in messages %}  
+			   <p>{{ message }}</p>  
+		  {% endfor %}  
+	{% endif %}  
+ 	{% endwith %}  
+	
 	<!-- Navigation bar -->
 	<div class="navigation">
-		<a href="#">Contact Us</a>
-		<a href="#">How to Help?</a>
-		<a href="#" style="background-color: #6bbf4b;">Donate</a>
+		<a href="insert url here">Contact Us</a>
+		<a href="insert url here">How to Help?</a>
+		<a href="insert url here" style="background-color: #6bbf4b;">Donate</a>
 	</div>
   <!-- Mission box -->
 <div class="mission-box">
@@ -181,13 +197,21 @@
 	</ul>
 </div>
 
-<!-- Welcome box -->
+<!-- Welcome box (login/signup form) -->
 <div class="welcome-box">
 	<h2>WELCOME</h2>
-	<input type="email" placeholder="abc12@gmail.com">
-	<input type="password" placeholder="********">
-	<button>Login</button>
-	<button class="signup">Sign Up</button>
+	<form method="POST", action="/">
+		<input type="text" name="username" placeholder="Username" required>
+		<br>
+		<input type="password" name="password" placeholder="Password" required>
+		<br>
+		<button type="submit" id="login_button">Login</button>
+	</form>
+		<form id='signup button'>
+			<button type="submit" class="btn btn-success" id="signup_student_button" formaction="/signup/student">SignUp as a Student</button>
+			<button type="submit" class="btn btn-success" id="signup_sponsor_button" formaction="/signup/sponsor">SignUp as a Sponsor</button>
+		</form>
+		  
 </div>
 
 <!-- Atiya-e-Ilm box -->
