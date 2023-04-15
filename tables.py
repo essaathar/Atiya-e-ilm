@@ -1,8 +1,5 @@
 import sqlite3
 
-import os.path
-
-
 def CreateStudentsTable():
     # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     # db_path = os.path.join(BASE_DIR, "students.db")
@@ -57,13 +54,3 @@ def InsertSponsor(first_name: str, last_name: str, username: str, password: str,
     ''', (first_name, last_name, username, password, email, company))
     conn.commit()
 
-# CreateStudentsTable()
-# CreateSponsorsTable()
-# # SAMPLE INSERTIONS
-# InsertStudent('Essa','Zuberi','echu123','abc123','essa123@gmai.com')
-# InsertStudent('Laiba','Jamil','libbu123','abc123','laiba123@gmai.com')
-# InsertStudent('Hania','Zuberi','hania123','abc123','hania123@gmai.com')
-# InsertStudent('Ibrahim','Haider','ibrahim123','abc123','ibrahim123@gmai.com')
-
-# InsertSponsor('Abdullah','Ahmed','abdullah123','abc123','abdullah123@tcf.pk','TCF')
-# InsertSponsor('Zain','Ali','zain123','abc123','zain123@ibex.pk','ibex')
