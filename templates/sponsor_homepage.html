@@ -1,27 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Student Funding Information</title>
+    <title>Student Applications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+      /* Add any custom CSS styles here */
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .box {
+        width: 90%;
+        max-width: 400px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .box h3 {
+        margin-top: 0;
+      }
+
+      .box p {
+        margin: 10px 0;
+      }
+
+      .box .amount {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+      }
+
+      .box .amount span {
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+      .box .amount p {
+        font-size: 18px;
+        margin-left: 5px;
+      }
+
+      .box button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #6bbf4b;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+    </style>
   </head>
   <body>
-    <h1>Student Funding Information</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Student ID</th>
-          <th>Amount Collected</th>
-          <th>Amount Needed</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for row in rows %}
-          <tr>
-            <td>{{ row[0] }}</td>
-            <td>{{ row[1] }}</td>
-            <td>{{ row[2] }}</td>
-          </tr>
+    <form method="POST" action="/donation">
+      <div class="container">
+        {% for row in data %}
+          <div class="box">
+            <h3>{{row[2]}}</h3>
+            <p>{{ row[0] }} {{ row[1] }}</</p>
+            <p>{{ row[3] }}</p>
+            <div class="amount">
+              <span>PKR {{ row[5] }}</span>
+              <p>raised of PKR {{ row[4] }}</p>
+            </div>
+            <form method="POST" action="{{ url_for('donation') }}">
+              <input type="hidden" name="first_name" value="{{ row[0] }}">
+              <input type="hidden" name="last_name" value="{{ row[1] }}">
+              <input type="hidden" name="application_name" value="{{ row[2] }}">
+              <input type="hidden" name="description" value="{{ row[3] }}">
+              <input type="hidden" name="amount_collected" value="{{ row[5] }}">
+              <input type="hidden" name="amount_needed" value="{{ row[4] }}">
+              <button type="submit" name="submit">Donate Now</button>
+            </form>
+          </div>
         {% endfor %}
-      </tbody>
-    </table>
+      </div>
+    </form>
   </body>
 </html>
