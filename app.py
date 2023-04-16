@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template,session, request, redirect, url_for, flash
 from tables import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY']  = 'dceicjewkjj1o3u98549efuo4'
 
-CreateStudentsTable()
 CreateSponsorsTable()
+CreateStudentsTable()
 
 # SAMPLE INSERTIONS
 InsertStudent('Essa','Zuberi','echu123','abc123','essa123@gmai.com')
@@ -16,8 +16,37 @@ InsertStudent('Ibrahim','Haider','ibrahim123','abc123','ibrahim123@gmai.com')
 InsertSponsor('Abdullah','Ahmed','abdullah123','abc123','abdullah123@tcf.pk','TCF')
 InsertSponsor('Zain','Ali','zain123','abc123','zain123@ibex.pk','ibex')
 
+create_student_funding_table()
+# Update funding for Essa Zuberi
+update_student_funds(1, 500, 1000)
+
+# Update funding for Laiba Jamil
+update_student_funds(2, 1000, 2000)
+
+# Update funding for Hania Zuberi
+update_student_funds(3, 750, 1500)
+
+# Update funding for Ibrahim Haider
+update_student_funds(4, 2000, 3000)
 
 @app.route('/', methods=['GET', 'POST'])
+# def home():
+#     # Connect to the students database
+#     student_funding_conn = sqlite3.connect('students.db')
+#     student_funding_cursor = student_funding_conn.cursor()
+
+#     # Print the table names to verify that student_funding table exists
+#     student_funding_cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+#     print(student_funding_cursor.fetchall())
+
+#     # Select all rows from the student_funding table
+#     student_funding_cursor.execute('SELECT * FROM student_funding')
+#     student_funding_rows = student_funding_cursor.fetchall()
+
+#     # Close the connection
+#     student_funding_conn.close()
+#     return render_template('home.html', student_funding_rows=student_funding_rows)
+
 def home():
     if request.method == 'POST':
         username = request.form['username']
@@ -38,7 +67,11 @@ def home():
         if student:
              return render_template('student_homepage.html', first_name = student[1])
         elif sponsor:
-            return render_template('testpage.html', first_name = sponsor[1])
+            return render_template('sponsor_homepage.html')
+            # student_funding_conn = sqlite3.connect('student_funding.db')
+            # student_funding_cursor = student_funding_conn.cursor()
+            # student_funding_cursor.execute('SELECT * FROM student_funding')
+            # student_funding = student_funding_cursor.fetchall()
         else:
             return render_template('home.html')
     else:
@@ -62,7 +95,7 @@ def sponsor_signup():
         InsertSponsor(first_name=first_name, last_name=last_name, 
                       username=username, password=password, email=email, company=company)
         
-        return render_template('testpage.html', first_name = first_name)
+        return render_template('sponsor_homepage.html', first_name = first_name)
     else:
         return render_template('sponsor_signup.html')
 
@@ -107,7 +140,10 @@ def process_donation():
     print(f"Security Code: {security_code}")
     print(f"Amount: {amount}")
 
+@app.route('/sponsor_homepage')
+def sponsor_homepage():
 
+    return render_template('sponsor_homepage.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
