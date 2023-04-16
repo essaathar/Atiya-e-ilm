@@ -133,17 +133,26 @@ def process_donation():
     security_code = request.form['security_code']
     amount = request.form['amount']
     
-       # Print the form data
+    # Print the form data
     print(f"Card Number: {card_number}")
     print(f"Cardholder Name: {cardholder_name}")
     print(f"Expiry Date: {expiry_date}")
     print(f"Security Code: {security_code}")
     print(f"Amount: {amount}")
 
+
 @app.route('/sponsor_homepage')
 def sponsor_homepage():
+    # Connect to the database and retrieve all student funds
+    conn = sqlite3.connect('student_funding.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM student_funding')
+    student_funds = cursor.fetchall()
+    conn.close()
 
-    return render_template('sponsor_homepage.html')
+    # Render the template and pass in the list of student funds
+    return render_template('sponsor_homepage.html', student_funds=student_funds)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
