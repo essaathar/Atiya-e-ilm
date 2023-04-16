@@ -87,6 +87,27 @@ def student_signup():
 def account(username):
     return render_template('student_homepage.html', first_name=username)
 
+@app.route('/donation')
+def donation():
+    return render_template('donation.html')
+
+@app.route('/process_donation', methods=['POST'])
+def process_donation():
+    # Retrieve form data
+    card_number = request.form['card_number']
+    cardholder_name = request.form['cardholder_name']
+    expiry_date = request.form['expiry_date']
+    security_code = request.form['security_code']
+    amount = request.form['amount']
+    
+       # Print the form data
+    print(f"Card Number: {card_number}")
+    print(f"Cardholder Name: {cardholder_name}")
+    print(f"Expiry Date: {expiry_date}")
+    print(f"Security Code: {security_code}")
+    print(f"Amount: {amount}")
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
