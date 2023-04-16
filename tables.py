@@ -1,9 +1,6 @@
 import sqlite3
 
-def CreateStudentsTable():
-    # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # db_path = os.path.join(BASE_DIR, "students.db")
-    conn = sqlite3.connect('students.db')
+def CreateStudentsTable(conn):
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -19,8 +16,7 @@ def CreateStudentsTable():
     conn.commit()
 
 
-def CreateSponsorsTable():
-    conn = sqlite3.connect('sponsors.db')
+def CreateSponsorsTable(conn):
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -37,8 +33,7 @@ def CreateSponsorsTable():
     conn.commit()
 
 
-def InsertStudent(first_name: str, last_name: str, username: str, password: str, email: str):
-    conn = sqlite3.connect('students.db')
+def InsertStudent(conn, first_name: str, last_name: str, username: str, password: str, email: str):
     cursor = conn.cursor()
     cursor.execute('''
         INSERT OR IGNORE INTO students (first_name, last_name, username, password, email)
@@ -47,8 +42,7 @@ def InsertStudent(first_name: str, last_name: str, username: str, password: str,
     conn.commit()
 
 
-def InsertSponsor(first_name: str, last_name: str, username: str, password: str, email: str, company: str):
-    conn = sqlite3.connect('sponsors.db')
+def InsertSponsor(conn, first_name: str, last_name: str, username: str, password: str, email: str, company: str):
     cursor = conn.cursor()
     cursor.execute('''
         INSERT OR IGNORE INTO sponsors (first_name, last_name, username, password, email, company)
@@ -56,14 +50,16 @@ def InsertSponsor(first_name: str, last_name: str, username: str, password: str,
     ''', (first_name, last_name, username, password, email, company))
     conn.commit()
 
-def create_student_funding_table():
-    conn = sqlite3.connect('student_funding.db')
+
+def create_student_funding_table(conn):
     cursor = conn.cursor()
 
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS student_funding (
+        CREATE TABLE IF NOT EXISTS applications (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             student_id INTEGER NOT NULL,
+            application_name TEXT NOT NULL,
+            description TEXT NOT NULL,
             amount_collected INTEGER NOT NULL,
             amount_needed INTEGER NOT NULL,
             FOREIGN KEY(student_id) REFERENCES students(id)
@@ -71,107 +67,48 @@ def create_student_funding_table():
     ''')
 
     conn.commit()
-    conn.close()
-def update_student_funds(student_id: int, amount_collected: int, amount_needed: int):
-    conn = sqlite3.connect('student_funding.db')
+
+
+def InsertApplication(conn, student_id: str, application_name: str, description: str, amount_needed: int, amount_collected: int):
     cursor = conn.cursor()
-
     cursor.execute('''
-        INSERT OR REPLACE INTO student_funding (student_id, amount_collected, amount_needed)
-        VALUES (?, ?, ?)
-    ''', (student_id, amount_collected, amount_needed))
-
+        INSERT OR REPLACE INTO applications (student_id, application_name, description, amount_collected, amount_needed)
+        VALUES (?, ?, ?, ?, ?)
+        ''', (student_id, application_name, description, amount_collected, amount_needed))
     conn.commit()
-    conn.close()
-# def CreateStudentFundingTable():
-#     conn = sqlite3.connect('student_funding.db')
-#     cursor = conn.cursor()
-
-#     cursor.execute('''
-#         CREATE TABLE IF NOT EXISTS student_funding (
-#             id INTEGER PRIMARY KEY,
-#             first_name TEXT NOT NULL,
-#             last_name TEXT NOT NULL,
-#             amount_collected INTEGER,
-#             amount_needed INTEGER,
-#             FOREIGN KEY(id) REFERENCES students(id)
-#         )
-#     ''')
-#     conn.commit()
 
 
-# def UpdateStudentFunding(student_id: int, amount_collected: int, amount_needed: int):
-#     conn = sqlite3.connect('student_funding.db')
-#     cursor = conn.cursor()
-
-#     cursor.execute('ATTACH DATABASE "students.db" AS students_db')
-#     cursor.execute('''
-#     INSERT INTO student_funding (id, first_name, last_name, amount_collected, amount_needed)
-#     SELECT students.id, students.first_name, students.last_name, ?, ?
-#     FROM students
-#     WHERE students.id=?
-# ''', (amount_collected, amount_needed, student_id))
-#     conn.commit()
-
-# def CreateStudentFundingTable():
-#     conn = sqlite3.connect('student_funding.db')
-#     cursor = conn.cursor()
-
-#     cursor.execute('''
-#         CREATE TABLE IF NOT EXISTS student_funding (
-#             id INTEGER PRIMARY KEY AUTOINCREMENT,
-#             student_id INTEGER NOT NULL,
-#             first_name TEXT NOT NULL,
-#             last_name TEXT NOT NULL,
-#             amount_collected INTEGER NOT NULL,
-#             amount_needed INTEGER NOT NULL,
-#             FOREIGN KEY(student_id) REFERENCES students(id)
-#         )
-#     ''')
-#     conn.commit()
 
 
-# def InsertStudentFunding(student_id: int, amount_collected: int, amount_needed: int):
-#     conn = sqlite3.connect('student_funding.db')
-#     cursor = conn.cursor()
+'''UNCOMMENT THE BELOW CODE BEFORE RUNNING THE PROJECT!'''
 
-#     cursor.execute('SELECT first_name, last_name FROM students WHERE id = ?', (student_id,))
-#     row = cursor.fetchone() 
-#     first_name, last_name = row[0], row[1]
+# conn = sqlite3.connect('atiya-e-ilm.db')
 
-#     cursor.execute('''
-#         INSERT INTO student_funding (student_id, first_name, last_name, amount_collected, amount_needed)
-#         VALUES (?, ?, ?, ?, ?)
-#     ''', (student_id, first_name, last_name, amount_collected, amount_needed))
-#     conn.commit()
+# CreateSponsorsTable(conn)
+# CreateStudentsTable(conn)
+# create_student_funding_table(conn)
 
-# def CreateStudentFundingTable():
-#     conn = sqlite3.connect('students.db')
-#     cursor = conn.cursor()
+# # SAMPLE INSERTIONS
+# InsertStudent(conn, 'Essa','Zuberi','echu123','abc123','essa123@gmai.com')
+# InsertStudent(conn, 'Laiba','Jamil','libbu123','abc123','laiba123@gmai.com')
+# InsertStudent(conn, 'Hania','Zuberi','hania123','abc123','hania123@gmai.com')
+# InsertStudent(conn, 'Ibrahim','Haider','ibrahim123','abc123','ibrahim123@gmai.com')
 
-#     cursor.execute('''
-#         CREATE TABLE IF NOT EXISTS student_funding (
-#             id INTEGER PRIMARY KEY AUTOINCREMENT,
-#             student_id INTEGER NOT NULL,
-#             amount_collected INTEGER NOT NULL,
-#             amount_needed INTEGER NOT NULL,
-#             FOREIGN KEY(student_id) REFERENCES students(id)
-#         )
-#     ''')
-#     conn.commit()
+# InsertSponsor(conn, 'Abdullah','Ahmed','abdullah123','abc123','abdullah123@tcf.pk','TCF')
+# InsertSponsor(conn, 'Zain','Ali','zain123','abc123','zain123@ibex.pk','ibex')
 
 
-# def InsertStudentFunding(student_id: int, amount_collected: int, amount_needed: int):
-#     conn = sqlite3.connect('students.db')
-#     cursor = conn.cursor()
 
-#     cursor.execute('SELECT first_name, last_name FROM students WHERE id = ?', (student_id,))
-#     row = cursor.fetchone() 
-#     first_name, last_name = row[0], row[1]
+# # Update funding for Essa Zuberi
+# InsertApplication(conn, 1, 'Harvard Program Funds', 'I got into Harvard program. Really need the money.', 500, 1000)
 
-#     cursor.execute('''
-#         INSERT INTO student_funding (student_id, first_name, last_name, amount_collected, amount_needed)
-#         VALUES (?, ?, ?, ?, ?)
-#     ''', (student_id, first_name, last_name, amount_collected, amount_needed))
-#     conn.commit()
+# # Update funding for Laiba Jamil
+# InsertApplication(conn, 2, "UCBP Funding", "I got into UCBerkley, really need the funding. Once in a life time opportunity.", 1000, 2000)
 
+# # Update funding for Hania Zuberi
+# InsertApplication(conn, 3, "Princeton program funds", "I got selected for Princeton Summer Program. I've done immense hardwork. Please help.", 750, 1500)
+
+# # Update funding for Ibrahim Haider
+# InsertApplication(conn, 4, "Brown University ST Program 2023", "Got into Brown Uni's summer tech program. Please really need the funds.", 2000, 3000)
+
+# conn.close()
