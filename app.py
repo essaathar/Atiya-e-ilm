@@ -5,6 +5,23 @@ app = Flask(__name__)
 app.config['SECRET_KEY']  = 'dceicjewkjj1o3u98549efuo4'
 
 
+@app.route('/admin')
+def admin():
+    conn = sqlite3.connect('students.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM applications")
+    applications = [dict(name=row[0], email=row[1], phone=row[2], address=row[3], major=row[4]) for row in c.fetchall()]
+    conn.close()
+
+    conn = sqlite3.connect('donors.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM donors")
+    donors = [dict(name=row[0], email=row[1], phone=row[2], address=row[3], amount=row[4]) for row in c.fetchall()]
+    conn.close()
+
+    return render_template('admin.html', applications=applications, donors=donors)
+
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():

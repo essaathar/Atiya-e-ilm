@@ -82,33 +82,33 @@ def InsertApplication(conn, student_id: str, application_name: str, description:
 
 '''UNCOMMENT THE BELOW CODE BEFORE RUNNING THE PROJECT!'''
 
-# conn = sqlite3.connect('atiya-e-ilm.db')
+conn = sqlite3.connect('atiya-e-ilm.db')
 
-# CreateSponsorsTable(conn)
-# CreateStudentsTable(conn)
-# create_student_funding_table(conn)
+CreateSponsorsTable(conn)
+CreateStudentsTable(conn)
+create_student_funding_table(conn)
 
-# # SAMPLE INSERTIONS
-# InsertStudent(conn, 'Essa','Zuberi','echu123','abc123','essa123@gmai.com')
-# InsertStudent(conn, 'Laiba','Jamil','libbu123','abc123','laiba123@gmai.com')
-# InsertStudent(conn, 'Hania','Zuberi','hania123','abc123','hania123@gmai.com')
-# InsertStudent(conn, 'Ibrahim','Haider','ibrahim123','abc123','ibrahim123@gmai.com')
+# SAMPLE INSERTIONS
+InsertStudent(conn, 'Essa','Zuberi','echu123','abc123','essa123@gmai.com')
+InsertStudent(conn, 'Laiba','Jamil','libbu123','abc123','laiba123@gmai.com')
+InsertStudent(conn, 'Hania','Zuberi','hania123','abc123','hania123@gmai.com')
+InsertStudent(conn, 'Ibrahim','Haider','ibrahim123','abc123','ibrahim123@gmai.com')
 
-# InsertSponsor(conn, 'Abdullah','Ahmed','abdullah123','abc123','abdullah123@tcf.pk','TCF')
-# InsertSponsor(conn, 'Zain','Ali','zain123','abc123','zain123@ibex.pk','ibex')
+InsertSponsor(conn, 'Abdullah','Ahmed','abdullah123','abc123','abdullah123@tcf.pk','TCF')
+InsertSponsor(conn, 'Zain','Ali','zain123','abc123','zain123@ibex.pk','ibex')
 
 
 
-# # Update funding for Essa Zuberi
-# InsertApplication(conn, 1, 'Harvard Program Funds', 'I got into Harvard program. Really need the money.', 500, 1000)
+# Update funding for Essa Zuberi
+InsertApplication(conn, 1, 'Harvard Program Funds', 'I got into Harvard program. Really need the money.', 500, 1000)
 
-# # Update funding for Laiba Jamil
-# InsertApplication(conn, 2, "UCBP Funding", "I got into UCBerkley, really need the funding. Once in a life time opportunity.", 1000, 2000)
+# Update funding for Laiba Jamil
+InsertApplication(conn, 2, "UCBP Funding", "I got into UCBerkley, really need the funding. Once in a life time opportunity.", 1000, 2000)
 
-# # Update funding for Hania Zuberi
-# InsertApplication(conn, 3, "Princeton program funds", "I got selected for Princeton Summer Program. I've done immense hardwork. Please help.", 750, 1500)
+# Update funding for Hania Zuberi
+InsertApplication(conn, 3, "Princeton program funds", "I got selected for Princeton Summer Program. I've done immense hardwork. Please help.", 750, 1500)
 
-# # Update funding for Ibrahim Haider
-# InsertApplication(conn, 4, "Brown University ST Program 2023", "Got into Brown Uni's summer tech program. Please really need the funds.", 2000, 3000)
+# Update funding for Ibrahim Haider
+InsertApplication(conn, 4, "Brown University ST Program 2023", "Got into Brown Uni's summer tech program. Please really need the funds.", 2000, 3000)
 
-# conn.close()
+conn.close()
