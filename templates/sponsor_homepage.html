@@ -62,29 +62,21 @@
     </style>
   </head>
   <body>
-    <form method="POST" action="/donation">
       <div class="container">
         {% for row in data %}
           <div class="box">
-            <h3>{{row[2]}}</h3>
-            <p>{{ row[0] }} {{ row[1] }}</</p>
-            <p>{{ row[3] }}</p>
-            <div class="amount">
-              <span>PKR {{ row[5] }}</span>
-              <p>raised of PKR {{ row[4] }}</p>
-            </div>
-            <form method="POST" action="{{ url_for('donation') }}">
-              <input type="hidden" name="first_name" value="{{ row[0] }}">
-              <input type="hidden" name="last_name" value="{{ row[1] }}">
-              <input type="hidden" name="application_name" value="{{ row[2] }}">
-              <input type="hidden" name="description" value="{{ row[3] }}">
-              <input type="hidden" name="amount_collected" value="{{ row[5] }}">
-              <input type="hidden" name="amount_needed" value="{{ row[4] }}">
-              <button type="submit" name="submit">Donate Now</button>
-            </form>
+              <h3 >{{row[2]}}</h3>
+              <p>{{ row[0] }} {{ row[1] }}</</p>
+              <p>{{ row[3] }}</p>
+              <div class="amount">
+                <span>PKR {{ row[4] }}</span>
+                <p>raised of PKR {{ row[5] }}</p>
+              </div>
+              <button onclick="window.location.href='/donate/{{ loop.index }}'">Donate Now</button>
+
           </div>
         {% endfor %}
       </div>
-    </form>
+  
   </body>
 </html>
