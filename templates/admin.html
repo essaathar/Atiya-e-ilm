@@ -3,102 +3,119 @@
   <head>
     <title>Admin Dashboard</title>
     <style>
-      /* Center align the cards */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #000000;
+        font-family: Arial, sans-serif;
+        margin: 0;
+      }
+
       .cards-container {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
       }
-      
-      /* Add scrolling to the cards */
-      .cards {
-        max-height: 500px;
-        overflow-y: scroll;
-      }
-      
+
       .card {
-        border: 1px solid #ccc;
-        padding: 10px;
-        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        max-width: 400px;
+        overflow: hidden;
       }
+
       .card-header {
+        background-color: #f2f2f2;
+        border-bottom: 1px solid #ccc;
+        color: #333;
+        font-size: 24px;
         font-weight: bold;
-        margin-bottom: 10px;
+        padding: 20px;
       }
+
       .card-body {
-        display: flex;
-        flex-direction: column;
+        padding: 20px;
       }
+
       .card-row {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
+
       .card-row label {
         font-weight: bold;
+        margin-right: 10px;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
       }
     </style>
   </head>
   <body>
-    {% set applications = get_student_applications() %}
-    {% set donors = get_donors() %}
     <div class="cards-container">
-      <div class="cards">
-        <div class="card">
-          <div class="card-header">Student Applications</div>
-          <div class="card-body">
-            {% for application in applications %}
-              <div class="card-row">
-                <label>Name:</label>
-                <span>{{ application.name }}</span>
-              </div>
-              <div class="card-row">
-                <label>Email:</label>
-                <span>{{ application.email }}</span>
-              </div>
-              <div class="card-row">
-                <label>Phone:</label>
-                <span>{{ application.phone }}</span>
-              </div>
-              <div class="card-row">
-                <label>Address:</label>
-                <span>{{ application.address }}</span>
-              </div>
-              <div class="card-row">
-                <label>Major:</label>
-                <span>{{ application.major }}</span>
-              </div>
-              <hr>
-            {% endfor %}
+      <div class="card">
+        <div class="card-header">Student Applications</div>
+        <div class="card-body">
+          {% for application in applications %}
+          <div class="card-row">
+            <label>Name:</label>
+            <span>{{ application.name }}</span>
           </div>
+          <div class="card-row">
+            <label>Email:</label>
+            <span>{{ application.email }}</span>
+          </div>
+          <div class="card-row">
+            <label>Phone:</label>
+            <span>{{ application.phone }}</span>
+          </div>
+          <div class="card-row">
+            <label>Address:</label>
+            <span>{{ application.address }}</span>
+          </div>
+          <div class="card-row">
+            <label>Major:</label>
+            <span>{{ application.major }}</span>
+          </div>
+          <hr>
+          {% endfor %}
         </div>
-        <div class="card">
-          <div class="card-header">Donors</div>
-          <div class="card-body">
-            {% for donor in donors %}
-              <div class="card-row">
-                <label>Name:</label>
-                <span>{{ donor.name }}</span>
-              </div>
-              <div class="card-row">
-                <label>Email:</label>
-                <span>{{ donor.email }}</span>
-              </div>
-              <div class="card-row">
-                <label>Phone:</label>
-                <span>{{ donor.phone }}</span>
-              </div>
-              <div class="card-row">
-                <label>Address:</label>
-                <span>{{ donor.address }}</span>
-              </div>
-              <div class="card-row">
-                <label>Amount:</label>
-                <span>{{ donor.amount }}</span>
-              </div>
-              <hr>
-            {% endfor %}
+      </div>
+      <div class="card">
+        <div class="card-header">Donors</div>
+        <div class="card-body">
+          {% for donor in donors %}
+          <div class="card-row">
+            <label>Name:</label>
+            <span>{{ donor.name }}</span>
           </div>
+          <div class="card-row">
+            <label>Email:</label>
+            <span>{{ donor.email }}</span>
+          </div>
+          <div class="card-row">
+            <label>Phone:</label>
+            <span>{{ donor.phone }}</span>
+          </div>
+          <div class="card-row">
+            <label>Address:</label>
+            <span>{{ donor.address }}</span>
+          </div>
+          <div class="card-row">
+            <label>Amount:</label>
+            <span>{{ donor.amount }}</span>
+          </div>
+          <hr>
+          {% endfor %}
         </div>
       </div>
     </div>
