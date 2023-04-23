@@ -1,5 +1,6 @@
 from flask import Flask, render_template,session, request, redirect, url_for, flash
 from flask_socketio import SocketIO, send
+import math
 from tables import *
 
 app = Flask(__name__)
@@ -34,10 +35,10 @@ def home():
         # print(f"student: {student}, sponsor: {sponsor}")
         if student:
             return redirect(url_for('student_homepage', first_name=student[1], username=student[3]))
-        # elif sponsor:
-        #     return redirect(url_for('sponsor_homepage'))
-        # elif admin:
-        #     return redirect(url_for('admin'))
+        elif sponsor:
+            return redirect(url_for('sponsor_homepage'), )
+        elif admin:
+            return redirect(url_for('admin'))
         else:
             flash('User doesnt exist/Incorrect Username or Password. Try Again!', category='error')
             return render_template('home.html')
@@ -155,8 +156,23 @@ def donation(student_id):
     return render_template('donation.html')
 
 
+# @app.route('/sponsor_homepage',  methods=['GET', 'POST'])
+# def sponsor_homepage():
+#     conn = sqlite3.connect('atiya-e-ilm.db')
+#     cursor = conn.cursor()
+#     cursor.execute('''
+#         SELECT first_name, last_name, application_name, description, amount_collected, amount_needed 
+#         FROM students 
+#         INNER JOIN applications 
+#         ON students.id = applications.student_id;
+#         ''')
+#     data = cursor.fetchall()
+#     # print(data)
+#     conn.close()
+
+#     return render_template('sponsor_homepage.html', data=data)\
 @app.route('/sponsor_homepage',  methods=['GET', 'POST'])
-def sponsor_homepage(name):
+def sponsor_homepage():
     conn = sqlite3.connect('atiya-e-ilm.db')
     cursor = conn.cursor()
     cursor.execute('''
@@ -169,7 +185,16 @@ def sponsor_homepage(name):
     # print(data)
     conn.close()
 
-    return render_template('sponsor_homepage.html', data=data)
+    # Pagination
+    per_page = 10
+    page = request.args.get('page', 1, type=int)
+    start = (page - 1) * per_page
+    end = start + per_page
+    paginated_data = data[start:end]
+    total_pages = math.ceil(len(data) / per_page)
+
+    return render_template('sponsor_homepage.html', data=paginated_data, page=page, total_pages=total_pages)
+
 
 # when student clicks start an application button
 @app.route('/start_application/<username>/<first_name>', methods=['GET', 'POST'])
