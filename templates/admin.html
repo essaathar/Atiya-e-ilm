@@ -6,9 +6,14 @@
       * {
         box-sizing: border-box;
       }
+      header {
+        background-color: #6bbf4b;
+        padding: 20px;
+        text-align: left;
+      }
 
       body {
-        background-color: #000000;
+        background-color: #f5f2f2;
         font-family: Arial, sans-serif;
         margin: 0;
       }
@@ -30,7 +35,7 @@
       }
 
       .card-header {
-        background-color: #f2f2f2;
+        background-color: #6bbf4b;
         border-bottom: 1px solid #ccc;
         color: #333;
         font-size: 24px;
@@ -58,10 +63,110 @@
         border-top: 1px solid #ccc;
         margin: 20px 0;
       }
+      .logout {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      .logout a {
+        display: inline-block;
+        padding: 10px;
+        background-color: #333333;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .logout a:hover {
+        background-color: #6bbf4b;
+      }
     </style>
   </head>
   <body>
+    <header>
+      <h1>Admin Dashboard</h1>
+    </header>
+    <div class="buttons-container">
+      <button id="applications-button">Student Applications</button>
+      <button id="donors-button">Donors</button>
+    </div>
+    <script>
+      const applicationsButton = document.getElementById('applications-button');
+      const applicationsCard = document.getElementById('applications-card');
+      const donorsButton = document.getElementById('donors-button');
+      const donorsCard = document.getElementById('donors-card');
+    
+      applicationsButton.addEventListener('click', () => {
+        applicationsCard.style.display = 'block';
+        donorsCard.style.display = 'none';
+      });
+    
+      donorsButton.addEventListener('click', () => {
+        applicationsCard.style.display = 'none';
+        donorsCard.style.display = 'block';
+      });
+    </script>
     <div class="cards-container">
+      <div class="card" id="applications-card">
+        <div class="card-header">Student Applications</div>
+        <div class="card-body">
+          {% for application in applications %}
+          <div class="card-row">
+            <label>Name:</label>
+            <span>{{ application.name }}</span>
+          </div>
+          <div class="card-row">
+            <label>Email:</label>
+            <span>{{ application.email }}</span>
+          </div>
+          <div class="card-row">
+            <label>Phone:</label>
+            <span>{{ application.phone }}</span>
+          </div>
+          <div class="card-row">
+            <label>Address:</label>
+            <span>{{ application.address }}</span>
+          </div>
+          <div class="card-row">
+            <label>Major:</label>
+            <span>{{ application.major }}</span>
+          </div>
+          <hr>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="card" id="donors-card">
+        <div class="card-header">Donors</div>
+        <div class="card-body">
+          {% for donor in donors %}
+          <div class="card-row">
+            <label>Name:</label>
+            <span>{{ donor.name }}</span>
+          </div>
+          <div class="card-row">
+            <label>Email:</label>
+            <span>{{ donor.email }}</span>
+          </div>
+          <div class="card-row">
+            <label>Phone:</label>
+            <span>{{ donor.phone }}</span>
+          </div>
+          <div class="card-row">
+            <label>Address:</label>
+            <span>{{ donor.address }}</span>
+          </div>
+          <div class="card-row">
+            <label>Amount:</label>
+            <span>{{ donor.amount }}</span>
+          </div>
+          <hr>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="cards-container">
       <div class="card">
         <div class="card-header">Student Applications</div>
         <div class="card-body">
@@ -116,8 +221,11 @@
           </div>
           <hr>
           {% endfor %}
-        </div>
+        </div> -->
       </div>
+    </div>
+    <div class="logout">
+      <a href="/">Logout</a>
     </div>
   </body>
 </html>
