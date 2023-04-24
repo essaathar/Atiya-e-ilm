@@ -3,7 +3,7 @@
   <head>
     <title>Admin Dashboard</title>
     <style>
-      * {
+       * {
         box-sizing: border-box;
       }
       header {
@@ -22,7 +22,9 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 20px; 
+        margin-top: 50px; 
+        padding-top: 20px; 
       }
 
       .card {
@@ -81,37 +83,57 @@
       .logout a:hover {
         background-color: #6bbf4b;
       }
+      
+
+      .button-container {
+        margin-top: 20px;
+        position: absolute;
+        /* top: auto; */
+        left: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .button-container button {
+        padding: 10px;
+        background-color: #6bbf4b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button-container button:hover {
+        background-color: #5aa43a;
+      }
+
+      .button-container button:focus {
+        outline: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        .button-container {
+          margin-top: 20px;
+        }
+      } 
     </style>
   </head>
   <body>
     <header>
       <h1>Admin Dashboard</h1>
     </header>
-    <div class="buttons-container">
-      <button id="applications-button">Student Applications</button>
+    <div class="button-container">
+      <button id="applications-button">Applications</button>
       <button id="donors-button">Donors</button>
     </div>
-    <script>
-      const applicationsButton = document.getElementById('applications-button');
-      const applicationsCard = document.getElementById('applications-card');
-      const donorsButton = document.getElementById('donors-button');
-      const donorsCard = document.getElementById('donors-card');
-    
-      applicationsButton.addEventListener('click', () => {
-        applicationsCard.style.display = 'block';
-        donorsCard.style.display = 'none';
-      });
-    
-      donorsButton.addEventListener('click', () => {
-        applicationsCard.style.display = 'none';
-        donorsCard.style.display = 'block';
-      });
-    </script>
     <div class="cards-container">
       <div class="card" id="applications-card">
         <div class="card-header">Student Applications</div>
         <div class="card-body">
           {% for application in applications %}
+          
           <div class="card-row">
             <label>Name:</label>
             <span>{{ application.name }}</span>
@@ -136,7 +158,7 @@
           {% endfor %}
         </div>
       </div>
-      <div class="card" id="donors-card">
+      <div class="card" id="donors-card" style="display: none;">
         <div class="card-header">Donors</div>
         <div class="card-body">
           {% for donor in donors %}
@@ -165,67 +187,30 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="cards-container">
-      <div class="card">
-        <div class="card-header">Student Applications</div>
-        <div class="card-body">
-          {% for application in applications %}
-          <div class="card-row">
-            <label>Name:</label>
-            <span>{{ application.name }}</span>
-          </div>
-          <div class="card-row">
-            <label>Email:</label>
-            <span>{{ application.email }}</span>
-          </div>
-          <div class="card-row">
-            <label>Phone:</label>
-            <span>{{ application.phone }}</span>
-          </div>
-          <div class="card-row">
-            <label>Address:</label>
-            <span>{{ application.address }}</span>
-          </div>
-          <div class="card-row">
-            <label>Major:</label>
-            <span>{{ application.major }}</span>
-          </div>
-          <hr>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">Donors</div>
-        <div class="card-body">
-          {% for donor in donors %}
-          <div class="card-row">
-            <label>Name:</label>
-            <span>{{ donor.name }}</span>
-          </div>
-          <div class="card-row">
-            <label>Email:</label>
-            <span>{{ donor.email }}</span>
-          </div>
-          <div class="card-row">
-            <label>Phone:</label>
-            <span>{{ donor.phone }}</span>
-          </div>
-          <div class="card-row">
-            <label>Address:</label>
-            <span>{{ donor.address }}</span>
-          </div>
-          <div class="card-row">
-            <label>Amount:</label>
-            <span>{{ donor.amount }}</span>
-          </div>
-          <hr>
-          {% endfor %}
-        </div> -->
-      </div>
-    </div>
-    <div class="logout">
+        <div class="logout">
       <a href="/">Logout</a>
     </div>
-  </body>
+    <script>
+      const applicationsButton = document.getElementById("applications-button");
+      const donorsButton = document.getElementById("donors-button");
+      const applicationsCard = document.getElementById("applications-card");
+      const donorsCard = document.getElementById("donors-card");
+
+      applicationsCard.style.display = 'none';
+      donorsCard.style.display = 'none';
+  
+      applicationsButton.addEventListener('click', () => {
+        // show applications card and hide donors card
+        applicationsCard.style.display = 'block';
+        donorsCard.style.display = 'none';
+      });
+  
+      donorsButton.addEventListener('click', () => {
+        // show donors card and hide applications card
+        donorsCard.style.display = 'block';
+        applicationsCard.style.display = 'none';
+      });
+      
+    </script>
+</body>
 </html>
