@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<title>My Page</title>
@@ -136,4 +136,457 @@
     </div>
 
 </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Page</title>
+	<style>
+		/* Reset default browser styles */
+		* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		}
+		h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 32px;
+        color: #ffffff;
+      }
+		/* Set global font and color styles */
+		body {
+		font-family: 'Open Sans', sans-serif;
+		color: #333;
+		}
+
+		/* Style the black box at the top */
+		.black-box {
+		background-color: #6bbf4b;
+		padding: 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		}
+
+		.black-box h1 {
+		color: #fff;
+		font-size: 32px;
+		/* font-weight: bold; */
+		}
+		.button-container {
+        margin-top: 20px;
+        position: absolute;
+        /* top: auto; */
+        left: 50px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .button-container button {
+        padding: 10px;
+        background-color: #6bbf4b;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button-container button:hover {
+        background-color: #5aa43a;
+      }
+
+      .button-container button:focus {
+        outline: none;
+      }
+
+      @media screen and (max-width: 768px) {
+        .button-container {
+          margin-top: 20px;
+        }
+      } 
+		/* Style the button container
+		.button-container {
+		display: flex;
+		}
+
+		.button {
+		background-color: #fff;
+		color: #000;
+		border: none;
+		padding: 10px 20px;
+		margin-right: 20px;
+		border-radius: 5px;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		}
+
+		.button:hover {
+		background-color: #6bbf4b;
+		color: #fff;
+		} */
+
+		/* Style the white box below the black box */
+		.white-box {
+		background-color: #fff;
+		padding: 20px;
+		text-align: center;
+		}
+
+		.green-button {
+		background-color: #6bbf4b;
+		color: #fff;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		font-size: 16px;
+		/* font-weight: bold; */
+		cursor: pointer;
+		transition: all 0.3s ease;
+		}
+
+		.green-button:hover {
+		background-color: #27ae60;
+		}
+
+		/* Style the black box below the search bar */
+		.black-box-below-search {
+		background-color: #000;
+		padding: 20px;
+		text-align: center;
+		}
+
+		.black-box-below-search h1 {
+		color: #fff;
+		font-size: 24px;
+		font-weight: bold;
+		}
+
+		/* Style the search bar */
+		.search-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 20px 0;
+		}
+
+		.logo {
+		width: 50px;
+		margin-right: 10px;
+		}
+
+		.search-bar {
+		border: none;
+		border-radius: 25px;
+		padding: 10px 20px;
+		font-size: 16px;
+		background-color: #f1f1f1;
+		width: 300px;
+		transition: all 0.3s ease;
+		box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+		}
+
+		.search-bar:focus {
+		outline: none;
+		background-color: #fff;
+		box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+		}
+		.logout {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+      }
+
+      .logout a {
+        display: inline-block;
+        padding: 10px;
+        background-color: #333333;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .logout a:hover {
+        background-color: #5aa43a;
+		transition: background-color 0.2s ease;
+
+      }
+
+
+</style>
+</head>
+<body>
+
+	<div class="black-box">
+		<h1>{{first_name}}'s Dashboard</h1>
+
+		</div>
+	<hr>
+	<div class="button-container">
+		<button class="nav">Home</button>
+		<button class="nav">MyBank</button>
+		<button class="nav">Profile</button>
+		<form method="POST">
+			<button class="green-button">Start an Application</button>
+		</form>
+	</div>
+	<div class="search-container">
+        <img src="path/to/logo.png" alt="Logo" class="logo">
+        <input type="text" placeholder="Search.." class="search-bar">
+    </div>
+	<!-- <div class="white-box">
+		<form method="POST">
+			<button class="green-button">Start an Application</button>
+		</form>
+	</div> -->
+	<div class="logout">
+		<a href="/">Logout</a>
+	  </div>
+</body>
+</body>
 </html>
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Page</title>
+	<style>
+		/* Reset default browser styles */
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		/* Set global font and color styles */
+		body {
+			font-family: 'Open Sans', sans-serif;
+			color: #333;
+		}
+
+		/* Style the black box at the top */
+		.black-box {
+			background-color: #000;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.black-box h1 {
+			color: #fff;
+			font-size: 32px;
+			font-weight: bold;
+		}
+
+		/* Style the button container */
+		.button-container {
+			display: flex;
+		}
+
+		.button {
+			background-color: #fff;
+			color: #000;
+			border: none;
+			padding: 10px 20px;
+			margin-right: 20px;
+			border-radius: 5px;
+			font-size: 16px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.button:hover {
+			background-color: #6bbf4b;
+			color: #fff;
+		}
+
+		/* Style the white box below the black box */
+		.white-box {
+			background-color: #fff;
+			padding: 20px;
+			text-align: center;
+		}
+
+		.green-button {
+			background-color: #2ecc71;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 5px;
+			font-size: 16px;
+			font-weight: bold;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.green-button:hover {
+			background-color: #27ae60;
+		}
+
+		/* Style the black box below the search bar */
+		.black-box-below-search {
+			background-color: #000;
+			padding: 20px;
+			text-align: center;
+			display: none;
+		}
+
+		.black-box-below-search h1 {
+			color: #fff;
+			font-size: 24px;
+			font-weight: bold;
+		}
+
+		/* Style the search bar */
+		.search-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 20px 0;
+		}
+
+		.logo {
+			width: 50px;
+			margin-right: 10px;
+		}
+
+		.search-bar {
+			border: none;
+			border-radius: 25px;
+			padding: 10px 20px;
+			font-size: 16px;
+			background-color: #f1f1f1;
+			width: 300px;
+			transition: all 0.3s ease;
+			box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+		}
+
+		.search-bar:focus {
+			outline: none;
+			background-color: #fff;
+			box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+		}
+
+		/* Style the fundraising card */
+		.fundraising-card {
+			background-color: #f1f1f1;
+			padding: 20px;
+			border-radius: 10px;
+			margin-top: 20px;
+			display: none; /* Hide the card by default */
+			}
+
+.fundraising-card input[type="text"],
+	.fundraising-card textarea,
+	.fundraising-card input[type="number"] {
+		display: block;
+		width: 100%;
+		margin-bottom: 10px;
+		padding: 10px;
+		border: none;
+		border-radius: 5px;
+		box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+		font-size: 16px;
+	}
+
+	.fundraising-card input[type="submit"] {
+		background-color: #2ecc71;
+		color: #fff;
+		border: none;
+		padding: 10px 20px;
+		border-radius: 5px;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.fundraising-card input[type="submit"]:hover {
+		background-color: #27ae60;
+	}
+
+	/* Style the card header */
+	.fundraising-card h2 {
+		font-size: 24px;
+		margin-bottom: 20px;
+	}
+
+	/* Style the close button */
+	.close-button {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		background-color: #ddd;
+		color: #333;
+		border: none;
+		padding: 5px 10px;
+		border-radius: 5px;
+		font-size: 16px;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	.close-button:hover {
+		background-color: #ccc;
+	} 
+
+</style>
+</head>
+<body>
+	<div class="black-box">
+		<h1>{{first_name}}'s Dashboard</h1>
+		<div class="button-container">
+			<button class="button">Home</button>
+			<button class="button">MyBank</button>
+			<button class="button">Profile</button>
+		</div>
+	</div>
+	<hr>
+	<div class="search-container">
+		<img src="path/to/logo.png" alt="Logo" class="logo">
+		<input type="text" placeholder="Search.." class="search-bar">
+	</div>
+
+	<div class="white-box">
+		 <form method="POST"> -->
+			<!-- <button id="start-btn" class="green-button">Start an Application</button>
+		</form>
+	</div>
+	
+	<div class="fundraising-card">
+		<button class="close-button">&times; Close</button>
+		<h2>Start Fundraising</h2>
+		 <form method="POST"> 
+			<label for="fundraiser-title">Fundraiser Title:</label>
+			<input type="text" id="fundraiser-title" name="fundraiser-title" placeholder="Enter Fundraiser Title">
+	
+			<label for="description">Description:</label>
+			<textarea id="description" name="description" placeholder="Enter Description (Max 200 words)"></textarea>
+	
+			<label for="amount-needed">Amount Needed:</label>
+			<input type="number" id="amount-needed" name="amount-needed" placeholder="Enter Amount Needed (Integer)">
+	
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+	
+	<script>
+		// Get the button and card elements
+		const startBtn = document.getElementById('start-btn');
+		const fundraisingCard = document.querySelector('.fundraising-card');
+		// Add event listener to start button
+		startBtn.addEventListener('click', () => {
+			// Show fundraising card
+			fundraisingCard.style.display = 'block';
+		});
+</script>
+	
+</body>
+</html>  -->
