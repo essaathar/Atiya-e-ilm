@@ -1,7 +1,7 @@
 from flask import Flask, render_template,session, request, redirect, url_for, flash
 from flask_socketio import SocketIO, send
-import math
 from tables import *
+import math
 
 app = Flask(__name__)
 app.config['SECRET_KEY']  = 'dceicjewkjj1o3u98549efuo4'
@@ -10,6 +10,8 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    # data = [('Essa', 'Zuberi', 'Harvard Program Funds', 'I got into Harvard program. Really need the money.', 0, 1000), ('Laiba', 'Jamil', 'UCBP Funding', 'I got into UCBerkley, really need the funding. Once in a life time opportunity.', 0, 2000), ('Hania', 'Zuberi', 'Princeton program funds', "I got selected for Princeton Summer Program. I've done immense hardwork. Please help.", 0, 1500), ('Ibrahim', 'Haider', 'Brown University ST Program 2023', "Got into Brown Uni's summer tech program. Please really need the funds.", 0, 3000), ('Dan', 'Ali', 'MIT SummerTech 2023', 'Hello everyone! I have worked extremely hard and have landed a position in this program. My financial restraints are the only hindrance. Please support as i really want to avail the opportunity.', 0, 150000)]
+    # return render_template('student_homepage.html', data=data)
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -44,24 +46,6 @@ def home():
             return render_template('home.html')
     else:
         return render_template('home.html')
-    
-
-# @app.route("/message/<name>/<username>", methods=['GET', "POST"])
-# def message(name, username):
-#     student_conn = sqlite3.connect('atiya-e-ilm.db')
-#     student_cursor = student_conn.cursor()
-#     student_cursor.execute('SELECT * FROM students')
-#     students = student_cursor.fetchall()
-#     student_conn.close()
-#     print(students)
-#     return render_template("message.html", first_name=name.split()[0], username=username, students=students)
-
-
-# @socketio.on("message")
-# def sendMessage(message):
-#     name = message["name"]
-#     text = message["text"]
-#     send(f"{name}: {text}", broadcast=True)
 
 
 
@@ -80,6 +64,7 @@ def admin():
     conn.close()
 
     return render_template('admin.html', applications=applications, donors=donors)
+
 
 # define route for sponsor signup
 @app.route('/signup/sponsor', methods=['GET', 'POST'])
@@ -102,6 +87,7 @@ def sponsor_signup():
         return render_template('sponsor_signup.html')
 
 
+
 @app.route('/signup/student', methods=['GET', 'POST'])
 def student_signup():
     if request.method == 'POST':
@@ -119,11 +105,21 @@ def student_signup():
         return redirect(url_for('student_homepage', username=username, first_name=first_name))
     else:
         return render_template('student_signup.html')
+    
+
 
 @app.route('/student_homepage/<username>/<first_name>', methods=['GET', 'POST'])
 def student_homepage(username, first_name):
+
     if request.method == 'POST':
-        return redirect(url_for('start_application', username=username, first_name=first_name))
+        if request.form['action'] == 'start_application': # if start your fundraiser button clicked
+            return redirect(url_for('start_application', username=username, first_name=first_name))
+        
+        elif request.form['action'] == 'profile_view': # if my profile button clicked
+            return render_template('student_profile.html', first_name=first_name)
+        
+        else:                                        # if logout button clicked
+            return redirect(url_for('home'))
     
     conn = sqlite3.connect('atiya-e-ilm.db')
     cursor = conn.cursor()
@@ -136,7 +132,8 @@ def student_homepage(username, first_name):
     data = cursor.fetchall()
     # print(data)
     conn.close()
-    return render_template('student_homepage.html', first_name=username, data=data)
+    return render_template('student_homepage.html', first_name=first_name, data=data)
+
 
 
 @app.route('/donate/<student_id>' , methods=['GET', 'POST'])
@@ -150,27 +147,12 @@ def donation(student_id):
         conn.commit()
         conn.close()
         return render_template('testpage.html')
-
-
+    
     #print(student_id)
     return render_template('donation.html')
 
 
-# @app.route('/sponsor_homepage',  methods=['GET', 'POST'])
-# def sponsor_homepage():
-#     conn = sqlite3.connect('atiya-e-ilm.db')
-#     cursor = conn.cursor()
-#     cursor.execute('''
-#         SELECT first_name, last_name, application_name, description, amount_collected, amount_needed 
-#         FROM students 
-#         INNER JOIN applications 
-#         ON students.id = applications.student_id;
-#         ''')
-#     data = cursor.fetchall()
-#     # print(data)
-#     conn.close()
 
-#     return render_template('sponsor_homepage.html', data=data)\
 @app.route('/sponsor_homepage',  methods=['GET', 'POST'])
 def sponsor_homepage():
     conn = sqlite3.connect('atiya-e-ilm.db')
@@ -196,6 +178,7 @@ def sponsor_homepage():
     return render_template('sponsor_homepage.html', data=paginated_data, page=page, total_pages=total_pages)
 
 
+
 # when student clicks start an application button
 @app.route('/start_application/<username>/<first_name>', methods=['GET', 'POST'])
 def start_application(username, first_name):
@@ -209,6 +192,7 @@ def start_application(username, first_name):
         conn.close()
         return render_template('application_uploaded.html', first_name = first_name)
     return render_template('start_application.html', username=username, first_name=first_name)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
