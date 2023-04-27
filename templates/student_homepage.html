@@ -328,11 +328,12 @@
 		</div>
 	<hr>
 	<div class="button-container">
-		<button class="nav">Home</button>
-		<button class="nav">MyBank</button>
-		<button class="nav">Profile</button>
 		<form method="POST">
-			<button class="green-button">Start an Application</button>
+			<button class="nav" name="action" value="profile_view">My Profile</button>
+			<button class="nav" name="action" value="logout">Logout</button>
+		</form>
+		<form method="POST">
+			<button class="green-button" name="action" value="start_application">Start your Fundraiser</button>
 		</form>
 	</div>
 	<div class="search-container">
