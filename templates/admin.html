@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Homepage</title>
     <style>
        * {
         box-sizing: border-box;
       }
+      .navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* add this line */
+
+}
+
+.navigation a {
+  display: inline-block;
+  padding: 20px;
+  color: #444;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  background-color: #6bbf4b;
+  color: #fff;
+}
+
+.navigation .logo {
+  float: left;
+  margin-left: 20px;
+}
+
+.navigation .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    background-color: #6bbf4b; /* Add this line */
+}
+
+.navigation .go-back-button {
+  float: right;
+  margin-right: 20px;
+  background-color: #444;
+  color: #fff;
+}
+
+.navigation .go-back-button:hover {
+  background-color: #6bbf4b;
+}
       header {
         background-color: #6bbf4b;
         padding: 20px;
@@ -126,16 +174,33 @@
           
         }
       } 
+      .nav-button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s;
+  }
+  .nav-button:hover {
+    background-color: #555;
+  }
     </style>
   </head>
   <body>
-    <header>
-      <h1>Admin Dashboard</h1>
-    </header>
+  <!-- Navigation bar -->
+  <div class="navigation">
+    <div class="logo"><a>ATYA-E-ILM</a></div>
+  <a href="#">My Profile</a>
+  <a href="#" class="nav-button" id="applications-button">View Applications</a>
+  <a href="#" class="nav-button" id="donors-button">View Donors</a>
+  <a href="#">View Stats</a>
+  <a href="/" class="go-back-button">Logout</a>
+  </div>
+<!-- 
     <div class="button-container">
       <button id="applications-button">Applications</button>
       <button id="donors-button">Donors</button>
-    </div>
+    </div> -->
     <div class="cards-container">
       <div class="card" id="applications-card">
         <div class="card-header">Student Applications</div>
@@ -203,21 +268,25 @@
       const donorsButton = document.getElementById("donors-button");
       const applicationsCard = document.getElementById("applications-card");
       const donorsCard = document.getElementById("donors-card");
+      const applicationsNavButton = document.getElementById("applications-button");
+      const donorsNavButton = document.getElementById("donors-button");
 
-      applicationsCard.style.display = 'none';
-      donorsCard.style.display = 'none';
-  
-      applicationsButton.addEventListener('click', () => {
-        // show applications card and hide donors card
-        applicationsCard.style.display = 'block';
-        donorsCard.style.display = 'none';
-      });
-  
-      donorsButton.addEventListener('click', () => {
-        // show donors card and hide applications card
-        donorsCard.style.display = 'block';
-        applicationsCard.style.display = 'none';
-      });
+  applicationsCard.style.display = 'none';
+  donorsCard.style.display = 'none';
+
+  applicationsButton.addEventListener('click', () => {
+    // show applications card and hide donors card
+    applicationsCard.style.display = 'block';
+    donorsCard.style.display = 'none';
+  });
+
+  donorsButton.addEventListener('click', () => {
+    // show donors card and hide applications card
+    donorsCard.style.display = 'block';
+    applicationsCard.style.display = 'none';
+  });
+
+
       
     </script>
 </body>

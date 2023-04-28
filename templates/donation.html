@@ -2,9 +2,58 @@
 <html>
 <head>
 	<title>Donate Now</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 	<style>
+		/* Navigation bar */
+		body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navigation a {
+  display: inline-block;
+  padding: 20px;
+  color: #444;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  background-color: #6bbf4b;
+  color: #fff;
+}
+
+.navigation .logo {
+  float: left;
+  margin-left: 20px;
+}
+
+.navigation .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    background-color: #6bbf4b; /* Add this line */
+}
+
+.navigation .go-back-button {
+  float: right;
+  margin-right: 20px;
+  background-color: #444;
+  color: #fff;
+}
+
+.navigation .go-back-button:hover {
+  background-color: #6bbf4b;
+}
         .card { 
             margin: auto;
             text-align: left;
@@ -92,56 +141,47 @@
         font-size: 32px;
         color: #ffffff;
       }
-	  body {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        color: #333333;
-      }
 
 	</style>
 </head>
 
 <body>
-	<header>
-		<h1>Student Donation</h1>
-	</header>
-    <div style="background-color: #f1f1f1; padding: 20px; text-align: center;">
+    	<!-- Navigation bar -->
+		<div class="navigation">
+			<div class="logo"><a>ATYA-E-ILM</a></div>
+			<a href="/sponsor_homepage">Sponsor Homepage</a>
+			<a href="#">My Profile</a>
+			<a href="#">Contact Us</a>
+			<a href="/sponsor_homepage" class="go-back-button">Go back</a>
+	
+		</div>
+    <div style="background-color: #f1f1f1; padding: 20px; text-align: center; margin-top: 80px;font-family: Arial, sans-serif;
+	">
 
 	<div class="card">
-        <button onclick="window.location.href='/sponsor_homepage'" 
-		style="background-color: #6bbf4b;
-		color: white; 
-		border: none; 
-		padding: 10px 20px; 
-		text-align: center; 
-		text-decoration: none; 
-		display: inline-block; 
-		font-size: 16px; 
-		margin: 4px 2px; 
-		cursor: pointer;">Go back to Fundraisers</button>
-    </button>
 		<h2>Your donation will benefit {{ user_name }}
         </h2>
 		<form method="POST">
-            <label for="card_number">Credit Card Number :</label>
+            <label for="card_number"><b>Credit Card Number:</b></label>
             <input type="text" id="card_number" name="card_number" pattern="[0-9]{16}" maxlength="16" required>
 
-			<label for="cardholder_name">Cardholder Name:</label>
+			<label for="cardholder_name"><b>Cardholder Name:</b></label>
 			<input type="text" id="cardholder_name" name="cardholder_name" required>
 
-			<label for="expiry_date">Expiry Date:</label>
+			<label for="expiry_date"><b>Expiry Date:</b></label>
 			<input type="month" id="expiry_date" name="expiry_date" required>
 
-			<label for="security_code">Security Code :</label>
+			<label for="security_code"><b>Security Code :</b></label>
             <input type="text" id="security_code" name="security_code" pattern="[0-9]{3}" maxlength="3" required>
 
-			<label for="amount">Donation Amount:</label>
+			<label for="amount"><b>Donation Amount:</b></label>
 			<input type="number" id="amount" name="amount" required>
 
             <div class="form-group">
                 <div class="form-check">
                 <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" required> By continuing, you agree with <Atiya-E-Ilm></Atiya-E-Ilm> terms and privacy notice.
-                </label>
+                <input type="checkbox" class="form-check-input" required><b>By continuing, you agree with our terms and privacy notice.
+                </b></label>
                 </div>
 
 

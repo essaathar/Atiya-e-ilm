@@ -7,10 +7,58 @@
     <style>
       /* Add any custom CSS styles here */
       body {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        color: #333333;
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
       }
 
+      .navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* add this line */
+
+}
+
+.navigation a {
+  display: inline-block;
+  padding: 20px;
+  color: #444;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.navigation a:hover {
+  background-color: #6bbf4b;
+  color: #fff;
+}
+
+.navigation .logo {
+  float: left;
+  margin-left: 20px;
+}
+
+.navigation .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    background-color: #6bbf4b; /* Add this line */
+}
+
+.navigation .go-back-button {
+  float: right;
+  margin-right: 20px;
+  background-color: #444;
+  color: #fff;
+}
+
+.navigation .go-back-button:hover {
+  background-color: #6bbf4b;
+}
       header {
         background-color: #6bbf4b;
         padding: 20px;
@@ -29,6 +77,7 @@
         flex-wrap: wrap;
         justify-content: center;
         margin-top: 20px;
+        margin-left: 200px;
       }
 
       .container {
@@ -38,7 +87,7 @@
         grid-gap: 20px;
         justify-content: center;
         padding: 20px;
-        margin-top: 20px;
+        margin-top: 50px;
       }
 
       .box {
@@ -83,26 +132,6 @@
         font-size: 18px;
       }
 
-      .logout {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-      }
-
-      .logout a {
-        display: inline-block;
-        padding: 10px;
-        background-color: #333333;
-        color: #ffffff;
-        text-decoration: none;
-        border-radius: 5px;
-      }
-
-      .logout a:hover {
-        background-color: #5aa43a;
-        transition: background-color 0.2s ease;
-      }
-
       .pagination {
         display: flex;
         justify-content: center;
@@ -112,8 +141,8 @@
       }
 
       .pagination a, .pagination span {
-        margin: 0 2px;
-        padding: 2px;
+        margin: 0 10px;
+        padding: 6px;
         background-color: #6bbf4b;
         color: #000000;
         text-decoration: none;
@@ -129,9 +158,15 @@
     </style>
   </head>
   <body>
-    <header>
-      <h1>Student Applications</h1>
-    </header>
+  <!-- Navigation bar -->
+  <div class="navigation">
+    <div class="logo"><a>ATYA-E-ILM</a></div>
+  <a href="#">My Profile</a>
+  <a href="#">My Bank</a>
+  <a href="#">Contact Us</a>
+  <a href="/" class="go-back-button">Logout</a>
+  </div>
+
     <div class="container">
       <h2>Recent Donations</h2>
       <hr>
@@ -147,20 +182,6 @@
         </div>
       {% endfor %}
     </div>   
-    <!-- <div class="container">
-      {% for row in data %}
-        <div class="box">
-          <h3>{{ row[2] }}</h3>
-          <p>{{ row[0] }} {{ row[1] }}</p>
-          <p>{{ row[3] }}</p>
-          <div class="amount">
-            <span>PKR {{ row[4] }}</span>
-            <p>raised of PKR {{ row[5] }}</p>
-          </div>
-          <button onclick="window.location.href='/donate/{{ loop.index }}'">Donate Now</button>
-        </div>
-      {% endfor %} -->
-    </div>
       <div class="pagination">
         {% if page > 1 %}
           <a href="?page={{ page - 1 }}">Previous</a>
@@ -178,10 +199,5 @@
           <a href="?page={{ page + 1 }}">Next</a>
         {% endif %}
       </div>
-    </div>
-    
-    <div class="logout">
-      <a href="/">Logout</a>
-    </div>
   </body>
 </html>
