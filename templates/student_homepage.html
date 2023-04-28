@@ -3,145 +3,6 @@
 <head>
 	<title>My Page</title>
 	<style>
-		/* Styling for black box */
-		.black-box-below-search {
-			background-color: black;
-			color: white;
-			width: 90%;
-			height: 900px;
-			position: absolute;
-			top: 164px;
-			left: 277px;
-            right: 0;
-			box-sizing: border-box;
-			padding: 8px;
-			text-align: left;
-		}
-		.black-box {
-			background-color: rgb(0, 0, 0);
-			color: #6bbf4b;
-			width: 100%;
-			position: absolute;
-			top: 0;
-			left: 0;
-			text-align: center;
-			padding: 20px 0;
-			box-sizing: border-box;
-			border-bottom: 5px solid #6bbf4b;
-		}
-
-
-		/* Styling for white box */
-		.white-box {
-			background-color: rgb(255, 255, 255);
-			width: 18%;
-			height: 600px;
-			position: absolute;
-			top: 164px;
-			left: 0;
-			box-sizing: border-box;
-			padding: 20px;
-		}
-
-		/* Styling for green button */
-		.green-button {
-			background-color: green;
-			color: white;
-			padding: 10px;
-			border-radius: 5px;
-			text-align: center;
-			margin: 20px 0;
-			cursor: pointer;
-		}
-
-
-        .search-container {
-            position: relative;
-            width: 100%;
-        }
-
-        .logo {
-        position: absolute;
-        top: 50%;
-        left: 10px;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
-        }
-
-		/* Styling for search bar */
-		.search-bar {
-			background-color: white;
-			border-radius: 20px;
-			border: none;
-			padding: 10px;
-			width: 50%;
-			margin: 0 auto;
-			box-sizing: border-box;
-			font-size: 18px;
-			color: grey;
-			text-align: center;
-			position: absolute;
-			top: 230px;
-			left: 25%;
-		}
-
-		/* Styling for black box below search bar */
-		
-
-
-		/* Styling for button container */
-		.button-container {
-			display: flex;
-			justify-content: center;
-		}
-
-		/* Styling for button */
-		.button {
-			background-color: white;
-			color: green;
-			padding: 10px;
-			border-radius: 5px;
-			text-align: center;
-			margin: 0 10px;
-			cursor: pointer;
-		}
-	</style>
-</head>
-<body>
-
-	<div class="black-box">
-		<h1>ATIYA-E-ILM</h1>
-		<div class="button-container">
-			<button class="button">Home</button>
-			<button class="button">MyBank</button>
-			<button class="button">Profile</button>
-		</div>
-	</div>
-	<hr>
-	<div class="white-box">
-		<form method="POST">
-			<button class="green-button">Start an Application</button>
-		</form>
-	</div>
-
-
-	<div class="black-box-below-search">
-		<h1>Hello {{first_name}}!</h1>
-	</div>
-
-	<div class="search-container">
-        <img src="path/to/logo.png" alt="Logo" class="logo">
-        <input type="text" placeholder="Search.." class="search-bar">
-    </div>
-
-</body>
-</html> -->
-<!DOCTYPE html>
-<html>
-<head>
-	<title>My Page</title>
-	<style>
 		/* Reset default browser styles */
 		* {
 		margin: 0;
@@ -207,29 +68,6 @@
           margin-top: 20px;
         }
       } 
-		/* Style the button container
-		.button-container {
-		display: flex;
-		}
-
-		.button {
-		background-color: #fff;
-		color: #000;
-		border: none;
-		padding: 10px 20px;
-		margin-right: 20px;
-		border-radius: 5px;
-		font-size: 16px;
-		font-weight: bold;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		}
-
-		.button:hover {
-		background-color: #6bbf4b;
-		color: #fff;
-		} */
-
 		/* Style the white box below the black box */
 		.white-box {
 		background-color: #fff;
@@ -316,6 +154,37 @@
 		transition: background-color 0.2s ease;
 
       }
+	  .container {
+			display: flex;
+  justify-content: center;
+			align-items: center; /* center its child elements vertically */
+  			flex-direction: column; /* display child elements vertically */
+			padding-top: 100px;
+		}
+		.card {
+			background-color: black;
+			color: azure;
+			border-radius: 10px;
+			box-shadow: 0 5px 10px #6bbf4b;
+			padding: 20px;
+			margin-bottom: 20px;
+			transition: transform 0.3s ease;
+			max-width: 500px; /* or another value that works for your design */
+			overflow-x: auto; /* clip any overflowing content */
+			}
+
+		.card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 8px 15px #6bbf4b;;
+		}
+		.card h2 {
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+		.card p {
+			margin-bottom: 5px;
+		}
+
 
 
 </style>
@@ -336,258 +205,218 @@
 			<button class="green-button" name="action" value="start_application">Start your Fundraiser</button>
 		</form>
 	</div>
+
 	<div class="search-container">
-        <img src="path/to/logo.png" alt="Logo" class="logo">
         <input type="text" placeholder="Search.." class="search-bar">
     </div>
-	<!-- <div class="white-box">
-		<form method="POST">
-			<button class="green-button">Start an Application</button>
-		</form>
-	</div> -->
-	<div class="logout">
-		<a href="/">Logout</a>
-	  </div>
+	<div class="container">
+	{% for row in data %}
+		<div class="card">
+			<h2>{{ row[0] }} {{row[1]}}</h2>
+			<p><u>Fundraiser</u>: {{ row[2] }}</p>
+			<p>Description: {{ row[3] }}</p>
+			<p>Collected: {{ row[4] }} PKR</p>
+			<p>Goal: {{ row[5] }} PKR</p>
+		</div>
+	{% endfor %}
+	</div>
 </body>
 </body>
-</html>
-<!-- 
+</html> -->
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>My Page</title>
-	<style>
-		/* Reset default browser styles */
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
+    <meta charset="utf-8">
+    <title>Student Homepage</title>
+    <style>
+        /* simple modern UI */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+		.navigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9999; /* add this line */
 
-		/* Set global font and color styles */
-		body {
-			font-family: 'Open Sans', sans-serif;
-			color: #333;
-		}
+}
 
-		/* Style the black box at the top */
-		.black-box {
-			background-color: #000;
-			padding: 20px;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-		}
+.navigation a {
+  display: inline-block;
+  padding: 20px;
+  color: #444;
+  font-size: 18px;
+  text-decoration: none;
+}
 
-		.black-box h1 {
-			color: #fff;
-			font-size: 32px;
-			font-weight: bold;
-		}
+.navigation a:hover {
+  background-color: #6bbf4b;
+  color: #fff;
+}
 
-		/* Style the button container */
-		.button-container {
-			display: flex;
-		}
+.navigation .logo {
+  float: left;
+  margin-left: 20px;
+}
 
-		.button {
-			background-color: #fff;
-			color: #000;
-			border: none;
-			padding: 10px 20px;
-			margin-right: 20px;
-			border-radius: 5px;
-			font-size: 16px;
-			font-weight: bold;
-			cursor: pointer;
-			transition: all 0.3s ease;
-		}
+.navigation .logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+    text-decoration: none;
+    background-color: #6bbf4b; /* Add this line */
+}
 
-		.button:hover {
-			background-color: #6bbf4b;
-			color: #fff;
-		}
+.navigation .go-back-button {
+  float: right;
+  margin-right: 20px;
+  background-color: #444;
+  color: #fff;
+}
 
-		/* Style the white box below the black box */
-		.white-box {
-			background-color: #fff;
-			padding: 20px;
-			text-align: center;
-		}
+.navigation .go-back-button:hover {
+  background-color: #6bbf4b;
+}
+header {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+  /* Dashboard title styles */
+  .dashboard-title {
+    background-color: #f2f2f2;
+    padding: 50px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  
+  .dashboard-title h1 {
+    font-size: 36px;
+    color: #444;
+    margin-bottom: 0;
+  }
 
-		.green-button {
-			background-color: #2ecc71;
-			color: #fff;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 5px;
-			font-size: 16px;
-			font-weight: bold;
-			cursor: pointer;
-			transition: all 0.3s ease;
-		}
+  .input {
+  border-radius: 10px;
+  outline: 2px solid #6bbf4b;
+  border: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #e2e2e2;
+  outline-offset: 3px;
+  padding: 10px 1rem;
+  transition: 0.25s;
+  margin: 0 auto;
+  display: block;
+  width: 50%;
+}
 
-		.green-button:hover {
-			background-color: #27ae60;
-		}
+.input:focus {
+  outline-offset: 5px;
+  background-color: #fff
+}
+.card {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #6bbf4b;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
 
-		/* Style the black box below the search bar */
-		.black-box-below-search {
-			background-color: #000;
-			padding: 20px;
-			text-align: center;
-			display: none;
-		}
+.card p {
+  margin: 5px 0;
+}
 
-		.black-box-below-search h1 {
-			color: #fff;
-			font-size: 24px;
-			font-weight: bold;
-		}
+.card .title {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
 
-		/* Style the search bar */
-		.search-container {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			margin: 20px 0;
-		}
+.card u {
+  text-decoration: none;
+  font-weight: bold;
+}
 
-		.logo {
-			width: 50px;
-			margin-right: 10px;
-		}
+.card u:hover {
+  text-decoration: underline;
+}
 
-		.search-bar {
-			border: none;
-			border-radius: 25px;
-			padding: 10px 20px;
-			font-size: 16px;
-			background-color: #f1f1f1;
-			width: 300px;
-			transition: all 0.3s ease;
-			box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-		}
+.card .description {
+  font-style: italic;
+}
 
-		.search-bar:focus {
-			outline: none;
-			background-color: #fff;
-			box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
-		}
-
-		/* Style the fundraising card */
-		.fundraising-card {
-			background-color: #f1f1f1;
-			padding: 20px;
-			border-radius: 10px;
-			margin-top: 20px;
-			display: none; /* Hide the card by default */
-			}
-
-.fundraising-card input[type="text"],
-	.fundraising-card textarea,
-	.fundraising-card input[type="number"] {
-		display: block;
-		width: 100%;
-		margin-bottom: 10px;
-		padding: 10px;
-		border: none;
-		border-radius: 5px;
-		box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
-		font-size: 16px;
-	}
-
-	.fundraising-card input[type="submit"] {
-		background-color: #2ecc71;
-		color: #fff;
-		border: none;
-		padding: 10px 20px;
-		border-radius: 5px;
-		font-size: 16px;
-		font-weight: bold;
-		cursor: pointer;
-		transition: all 0.3s ease;
-	}
-
-	.fundraising-card input[type="submit"]:hover {
-		background-color: #27ae60;
-	}
-
-	/* Style the card header */
-	.fundraising-card h2 {
-		font-size: 24px;
-		margin-bottom: 20px;
-	}
-
-	/* Style the close button */
-	.close-button {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		background-color: #ddd;
-		color: #333;
-		border: none;
-		padding: 5px 10px;
-		border-radius: 5px;
-		font-size: 16px;
-		font-weight: bold;
-		cursor: pointer;
-	}
-
-	.close-button:hover {
-		background-color: #ccc;
-	} 
 
 </style>
-</head>
-<body>
-	<div class="black-box">
-		<h1>{{first_name}}'s Dashboard</h1>
-		<div class="button-container">
-			<button class="button">Home</button>
-			<button class="button">MyBank</button>
-			<button class="button">Profile</button>
-		</div>
-	</div>
-	<hr>
-	<div class="search-container">
-		<img src="path/to/logo.png" alt="Logo" class="logo">
-		<input type="text" placeholder="Search.." class="search-bar">
-	</div>
+<head>
+    <title>ATYA-E-ILM</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <div class="navigation">
+      <div class="logo"><a>ATYA-E-ILM</a></div>
+	  <a href="#">My Profile</a>
+	  <a href="#">My Bank</a>
+	  <a href="/start_application/<username>/<first_name>">Start an Application</a>
+      <a href="#">Contact Us</a>
+	  <a href="/" class="go-back-button">Logout</a>
+    </div>
 
-	<div class="white-box">
-		 <form method="POST"> -->
-			<!-- <button id="start-btn" class="green-button">Start an Application</button>
-		</form>
+	<div class="dashboard-title">
+		<h1>{{first_name}}'s Dashboard</h1>
 	</div>
 	
-	<div class="fundraising-card">
-		<button class="close-button">&times; Close</button>
-		<h2>Start Fundraising</h2>
-		 <form method="POST"> 
-			<label for="fundraiser-title">Fundraiser Title:</label>
-			<input type="text" id="fundraiser-title" name="fundraiser-title" placeholder="Enter Fundraiser Title">
-	
-			<label for="description">Description:</label>
-			<textarea id="description" name="description" placeholder="Enter Description (Max 200 words)"></textarea>
-	
-			<label for="amount-needed">Amount Needed:</label>
-			<input type="number" id="amount-needed" name="amount-needed" placeholder="Enter Amount Needed (Integer)">
-	
-			<input type="submit" value="Submit">
-		</form>
+	<input type="text" placeholder="Search here..." name="text" class="input">
+	<div class="container">
+		{% for row in data %}
+		<div class="card">
+			<div class="card-info">
+				<p class="title">{{ row[0] }} {{row[1]}}</p>
+				<p>Fundraiser: {{ row[2] }}</p>
+				<p>Description: {{ row[3] }}</p>
+				<p>Collected: {{ row[4] }} PKR</p>
+				<p>Goal: {{ row[5] }} PKR</p>
+			</div>
+		</div>
+		{% endfor %}
 	</div>
 	
-	<script>
-		// Get the button and card elements
-		const startBtn = document.getElementById('start-btn');
-		const fundraisingCard = document.querySelector('.fundraising-card');
-		// Add event listener to start button
-		startBtn.addEventListener('click', () => {
-			// Show fundraising card
-			fundraisingCard.style.display = 'block';
-		});
-</script>
-	
-</body>
-</html>  -->
+	<!-- <div class="container">
+	{% for row in data %}
+
+		<div class="card">
+			<div class="card-info">
+			<p class="title">{{ row[0] }} {{row[1]}}</p>
+			<p><u>Fundraiser</u>: {{ row[2] }}</p>
+			<p>Description: {{ row[3] }}</p>
+			<p>Collected: {{ row[4] }} PKR</p>
+			<p>Goal: {{ row[5] }} PKR</p>
+			</div>
+		</div>
+	{% endfor %}
+
+	</div> -->
+
+	  
+  </body>
+</html>
